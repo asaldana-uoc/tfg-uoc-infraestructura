@@ -1,3 +1,5 @@
-# Repositori per la infraestructura a GCP del TFG 
+# Infraestructura a GCP pel TFG 
 
-Repositori per emmagatzemar el codi amb la infrastructura de la plataform
+Aquest repositori conté el codi de terraform per a desplegar la infraestructura a Google Cloud Platform que es necessita
+per realitzar el treball de fi de grau "GitOps: l'evolució de la cultura DevOps"
+

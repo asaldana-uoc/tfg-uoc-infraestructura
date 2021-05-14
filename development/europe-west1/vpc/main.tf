@@ -1,3 +1,5 @@
+# Mòdul del registry per a crear un VPC, una network i dues subnetworks amb
+# l'adreçament IP especificat en el disseny de la topologia de xarxa
 module "vpc" {
   source  = "terraform-google-modules/network/google"
   version = "3.2.2"
@@ -20,6 +22,8 @@ module "vpc" {
   ]
 }
 
+# Mòdul del registry per a crear un Cloud NAT per donar sortida a Internet
+# a les instàncies que no tinguin adreçament IP públic
 module "cloud-router" {
   source  = "terraform-google-modules/cloud-router/google"
   version = "1.0.0"

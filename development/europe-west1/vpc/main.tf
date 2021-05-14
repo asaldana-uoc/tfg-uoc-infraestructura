@@ -19,3 +19,22 @@ module "vpc" {
     }
   ]
 }
+
+module "cloud-router" {
+  source  = "terraform-google-modules/cloud-router/google"
+  version = "1.0.0"
+
+  name    = format("%s-%s", local.prefix_name, "router")
+  project = local.project_id
+  region  = local.region
+  network = module.vpc.network_name
+
+  nats = [{
+    name                               = format("%s-%s", local.prefix_name, "nat-gw")
+    source_subnetwork_ip_ranges_to_nat = "LIST_OF_SUBNETWORKS"
+    subnetworks = [{
+      name                    = format("%s-%s", local.prefix_name, "subnet-private")
+      source_ip_ranges_to_nat = ["172.17.0.0/23"]
+    }]
+  }]
+}

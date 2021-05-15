@@ -1,5 +1,7 @@
+# Recurs obligatori pel funcionament del mòdul gke-private-cluster
 data "google_client_config" "default" {}
 
+# Recurs obligatori pel funcionament del mòdul gke-private-cluster
 provider "kubernetes" {
   load_config_file       = false
   host                   = "https://${module.gke-private-cluster.endpoint}"
@@ -7,6 +9,8 @@ provider "kubernetes" {
   cluster_ca_certificate = base64decode(module.gke-private-cluster.ca_certificate)
 }
 
+# Submòdul del registry per a crear un clúster de Kubernetes amb adreçament IP privat.
+# A banda del control plane, també es defineix un grup de nodes que serà on s'executin els pods.
 module "gke-private-cluster" {
   source  = "terraform-google-modules/kubernetes-engine/google//modules/private-cluster"
   version = "14.3.0"
@@ -21,6 +25,7 @@ module "gke-private-cluster" {
   subnetwork                 = "tfg-uoc-subnet-private"
   ip_range_pods              = "tfg-uoc-subnet-private-k8s-pods"
   ip_range_services          = "tfg-uoc-subnet-private-k8s-services"
+  create_service_account     = true
   remove_default_node_pool   = true
   http_load_balancing        = true
   default_max_pods_per_node  = 100

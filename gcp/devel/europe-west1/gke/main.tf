@@ -12,9 +12,8 @@ provider "kubernetes" {
 # Submòdul del registry per a crear un clúster de Kubernetes amb adreçament IP privat.
 # A banda del control plane, també es defineix un grup de nodes que serà on s'executin els pods.
 module "gke-private-cluster" {
-  source  = "terraform-google-modules/kubernetes-engine/google//modules/private-cluster"
-  version = "14.3.0"
-
+  source                     = "terraform-google-modules/kubernetes-engine/google//modules/private-cluster"
+  version                    = "14.3.0"
   project_id                 = local.project_id
   name                       = format("%s-%s", local.prefix_name, "k8s-cp")
   description                = "Clúster de Kubernetes per a la realització del TFG"
@@ -34,7 +33,6 @@ module "gke-private-cluster" {
   network_policy_provider    = "CALICO"
   enable_private_endpoint    = false
   enable_private_nodes       = true
-
   master_authorized_networks = [
     {
       cidr_block   = "${var.allowed_ip_access_control_plane}/32",
@@ -44,20 +42,16 @@ module "gke-private-cluster" {
 
   node_pools = [
     {
-      name            = format("%s-%s", local.prefix_name, "k8s-nodes")
-      machine_type    = "e2-small"
-      node_locations  = join(",", local.zones)
-      min_count       = 1
-      max_count       = 2
-      local_ssd_count = 0
-      disk_size_gb    = 50
-      disk_type       = "pd-standard"
-      image_type      = "cos_containerd"
-      auto_repair     = true
-      auto_upgrade    = true
-      preemptible     = false
+      name           = format("%s-%s", local.prefix_name, "k8s-nodes")
+      machine_type   = "e2-small"
+      node_locations = join(",", local.zones)
+      min_count      = 1
+      max_count      = 2
+      disk_size_gb   = 50
+      disk_type      = "pd-standard"
+      image_type     = "cos_containerd"
+      auto_repair    = true
+      auto_upgrade   = true
     },
   ]
 }
-
-

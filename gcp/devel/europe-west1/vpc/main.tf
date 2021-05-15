@@ -10,9 +10,10 @@ module "vpc" {
 
   subnets = [
     {
-      subnet_name   = format("%s-%s", local.prefix_name, "subnet-private")
-      subnet_ip     = "172.17.0.0/23"
-      subnet_region = local.region
+      subnet_name           = format("%s-%s", local.prefix_name, "subnet-private")
+      subnet_ip             = "172.17.0.0/23"
+      subnet_region         = local.region
+      subnet_private_access = true
     },
     {
       subnet_name   = format("%s-%s", local.prefix_name, "subnet-public")
@@ -20,6 +21,20 @@ module "vpc" {
       subnet_region = local.region
     }
   ]
+
+  secondary_ranges = {
+    tfg-uoc-subnet-private = [
+      {
+        range_name    = "tfg-uoc-subnet-private-k8s-pods"
+        ip_cidr_range = "10.10.0.0/20"
+      },
+      {
+        range_name    = "tfg-uoc-subnet-private-k8s-services"
+        ip_cidr_range = "10.20.0.0/22"
+      },
+    ]
+  }
+
 }
 
 # Mòdul del registry per a crear un Cloud NAT per donar sortida a Internet

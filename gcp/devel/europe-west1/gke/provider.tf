@@ -5,10 +5,10 @@ provider "google" {
 }
 
 # Aquesta secció es per definir la ubicació on s'emmagatzemarà l'estat de terraform.
-# Utilitzem el bucket tfg-uoc-tfstate-eu i desem la configuració del VPC en la ruta development/europe-west1/vpc
+# Utilitzem el bucket tfg-uoc-tfstate-eu i desem la configuració del VPC en la ruta development/europe-west1/gke
 terraform {
   backend "gcs" {
     bucket = "tfg-uoc-tfstate-eu"
-    prefix = "development/europe-west1/vpc"
+    prefix = "devel/europe-west1/gke"
   }
 }

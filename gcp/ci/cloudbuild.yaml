@@ -1,0 +1,22 @@
+steps:
+  - id: 'terraform format'
+    name: 'hashicorp/terraform:0.15.3'
+    entrypoint: 'sh'
+    args:
+      - '-c'
+      - |
+        terraform fmt -check -diff -recursive
+  - id: 'terraform validate'
+    name: 'hashicorp/terraform:0.15.3'
+    entrypoint: 'sh'
+    args:
+      - '-c'
+      - |
+        current_path=`pwd`
+        for folder in gcp/*/
+        do
+          cd ${folder}
+          echo "[INFO] - Validating terraform files in path ${folder}"
+          terraform plan || exit 1
+          cd ${current_path}
+        done

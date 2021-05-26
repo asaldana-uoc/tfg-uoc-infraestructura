@@ -13,7 +13,7 @@ steps:
       - '-c'
       - |
         current_path=`pwd`
-        for folder in `find . -type d`
+        for folder in `find ./gcp -type d`
         do
           cd ${folder}
           echo "[INFO] - Validating terraform files in path ${folder}"

@@ -17,6 +17,7 @@ steps:
         do
           cd ${folder}
           echo "[INFO] - Validating terraform files in path ${folder}"
-          terraform plan || exit 1
+          terraform init || exit 1
+          terraform validate || exit 1
           cd ${current_path}
         done

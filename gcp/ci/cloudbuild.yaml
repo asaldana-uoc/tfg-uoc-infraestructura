@@ -13,11 +13,11 @@ steps:
       - '-c'
       - |
         current_path=`pwd`
-        for folder in gcp/*/
+        for folder in `find . -type d`
         do
           cd ${folder}
           echo "[INFO] - Validating terraform files in path ${folder}"
-          terraform init || exit 1
+          terraform init -backend=false || exit 1
           terraform validate || exit 1
           cd ${current_path}
         done

@@ -5,7 +5,7 @@ steps:
     args:
       - '-c'
       - |
-        terraform fmt -check -diff -recursive
+        terraform fmt -check -diff -recursive || exit 1
   - id: 'terraform validate'
     name: 'hashicorp/terraform:0.15.3'
     entrypoint: 'sh'

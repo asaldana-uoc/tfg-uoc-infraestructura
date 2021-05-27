@@ -1,3 +1,5 @@
+# Es crea un trigger específic en Google Cloud Build per a que
+# s'executi en cada Pull Request a la que es detecti un commit nou
 resource "google_cloudbuild_trigger" "ci_trigger" {
   name        = "tfg-uoc-infraestructura-ci"
   description = "Trigger que s'executarà en cada Pull Request nova"

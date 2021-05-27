@@ -6,6 +6,7 @@ steps:
       - '-c'
       - |
         terraform fmt -check -diff -recursive || exit 1
+    timeout: 60s
   - id: 'terraform validate'
     name: 'hashicorp/terraform:0.15.3'
     entrypoint: 'sh'
@@ -21,3 +22,4 @@ steps:
           terraform validate || exit 1
           cd ${current_path}
         done
+    timeout: 60s

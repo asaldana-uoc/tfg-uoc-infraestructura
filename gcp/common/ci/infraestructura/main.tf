@@ -3,7 +3,7 @@
 resource "google_cloudbuild_trigger" "ci_trigger" {
   name        = "tfg-uoc-infraestructura-ci"
   description = "Trigger que s'executarà en cada Pull Request nova"
-  filename    = "gcp/ci/cloudbuild.yaml"
+  filename    = "gcp/ci/infraestructura/cloudbuild.yaml"
 
   github {
     owner = "asaldana-uoc"
@@ -26,6 +26,6 @@ provider "google" {
 terraform {
   backend "gcs" {
     bucket = "tfg-uoc-tfstate-eu"
-    prefix = "ci"
+    prefix = "common/ci/infraestructura"
   }
 }

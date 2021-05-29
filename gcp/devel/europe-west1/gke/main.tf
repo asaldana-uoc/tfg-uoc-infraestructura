@@ -35,8 +35,8 @@ module "gke-private-cluster" {
   enable_private_nodes       = true
   master_authorized_networks = [
     {
-      cidr_block   = "${var.allowed_ip_access_control_plane}/32",
-      display_name = "Adreça IP casa"
+      cidr_block   = var.allowed_ip_access_control_plane
+      display_name = "Rang IPs autoritzat"
     },
   ]
 
@@ -54,4 +54,8 @@ module "gke-private-cluster" {
       auto_upgrade   = true
     },
   ]
+
+  lifecycle = {
+    ifno
+  }
 }

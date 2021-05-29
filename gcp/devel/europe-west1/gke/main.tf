@@ -27,7 +27,7 @@ module "gke-private-cluster" {
   create_service_account     = true
   remove_default_node_pool   = true
   http_load_balancing        = true
-  default_max_pods_per_node  = 100
+  default_max_pods_per_node  = 105
   horizontal_pod_autoscaling = true
   network_policy             = true
   network_policy_provider    = "CALICO"

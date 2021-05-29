@@ -8,7 +8,7 @@ locals {
 resource "google_cloudbuild_trigger" "cd_trigger" {
   name        = "tfg-uoc-cd-devel-infraestructura"
   description = "Trigger que s'executarà cada nou commit a la branca main quan s'hagin modificat arxius del directori devel"
-  filename    = "gcp/cd/infraestructura/${local.environment}/cloudbuild.yaml"
+  filename    = "gcp/common/cd/infraestructura/${local.environment}/cloudbuild.yaml"
   included_files = ["gcp/${local.environment}/**"]
 
   substitutions = {

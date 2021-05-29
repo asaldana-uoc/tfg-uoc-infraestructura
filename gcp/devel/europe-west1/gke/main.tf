@@ -27,7 +27,7 @@ module "gke-private-cluster" {
   create_service_account     = true
   remove_default_node_pool   = true
   http_load_balancing        = true
-  default_max_pods_per_node  = 109
+  default_max_pods_per_node  = 100
   horizontal_pod_autoscaling = true
   network_policy             = true
   network_policy_provider    = "CALICO"
@@ -47,7 +47,7 @@ module "gke-private-cluster" {
       node_locations = join(",", local.zones)
       min_count      = 1
       max_count      = 2
-      disk_size_gb   = 50
+      disk_size_gb   = 100
       disk_type      = "pd-standard"
       image_type     = "cos_containerd"
       auto_repair    = true

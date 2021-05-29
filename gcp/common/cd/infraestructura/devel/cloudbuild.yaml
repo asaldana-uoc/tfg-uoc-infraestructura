@@ -18,7 +18,7 @@ steps:
           fi
           cd ${current_path}
         done
-    timeout: 300s
+    timeout: 3600s
   - id: 'terraform apply'
     name: 'hashicorp/terraform:0.15.3'
     entrypoint: 'sh'
@@ -38,4 +38,4 @@ steps:
           fi
           cd ${current_path}
         done
-    timeout: 300s
+    timeout: 3600s

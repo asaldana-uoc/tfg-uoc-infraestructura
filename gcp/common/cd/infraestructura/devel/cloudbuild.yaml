@@ -9,7 +9,7 @@ steps:
         for folder in `find ./gcp/${_ENVIRONMENT} -type d`
         do
           cd ${folder}
-          if [ ls *.tf &>/dev/null ]; then
+          if ls *.tf &>/dev/null; then
             echo "[INFO] - Visualitzant els canvis d'infraestructura a aplicar en el directori ${folder}"
             terraform init -backend=false || exit 1
             terraform plan || exit 1

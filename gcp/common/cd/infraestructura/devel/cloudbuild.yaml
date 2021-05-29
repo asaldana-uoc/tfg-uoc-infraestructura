@@ -9,9 +9,13 @@ steps:
         for folder in `find ./gcp/${_ENVIRONMENT} -type d`
         do
           cd ${folder}
-          echo "[INFO] - Visualitzant els canvis d'infraestructura a aplicar en el directori ${folder}"
-          terraform init -backend=false || exit 1
-          terraform plan || exit 1
+          if [ ls *.tf &>/dev/null ]; then
+            echo "[INFO] - Visualitzant els canvis d'infraestructura a aplicar en el directori ${folder}"
+            terraform init -backend=false || exit 1
+            terraform plan || exit 1
+          else
+            echo "[INFO] - No s'han trobat arxius de terraform en el directori ${folder}"
+          fi
           cd ${current_path}
         done
     timeout: 60s
@@ -25,8 +29,12 @@ steps:
         for folder in `find ./gcp/${_ENVIRONMENT} -type d`
         do
           cd ${folder}
-          echo "[INFO] - Visualitzant els canvis d'infraestructura a aplicar en el directori ${folder}"
-           terraform apply -auto-approve || exit 1
+          if [ ls *.tf &>/dev/null ]; then
+            echo "[INFO] - Aplicant canvis d'infraestructura en el directori ${folder}"
+            terraform apply -auto-approve || exit 1
+          else
+            echo "[INFO] - No s'han trobat arxius de terraform en el directori ${folder}"
+          fi
           cd ${current_path}
         done
     timeout: 60s

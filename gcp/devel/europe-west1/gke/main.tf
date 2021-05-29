@@ -54,8 +54,4 @@ module "gke-private-cluster" {
       auto_upgrade   = true
     },
   ]
-
-  lifecycle = {
-    ifno
-  }
 }

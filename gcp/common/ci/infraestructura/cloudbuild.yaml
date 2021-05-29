@@ -14,7 +14,7 @@ steps:
       - '-c'
       - |
         current_path=`pwd`
-        for folder in `find ./gcp -type d`
+        for folder in `find ./gcp -not -path '*/\.*' -type d`
         do
           cd ${folder}
           echo "[INFO] - Validant els fitxers de terraform al directori ${folder}"

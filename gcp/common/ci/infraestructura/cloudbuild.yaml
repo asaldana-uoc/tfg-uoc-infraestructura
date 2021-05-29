@@ -17,7 +17,7 @@ steps:
         for folder in `find ./gcp -type d`
         do
           cd ${folder}
-          echo "[INFO] - Validating terraform files in path ${folder}"
+          echo "[INFO] - Validant els fitxers de terraform al directori ${folder}"
           terraform init -backend=false || exit 1
           terraform validate || exit 1
           cd ${current_path}

@@ -1,16 +1,25 @@
+locals {
+  environment = "devel"
+}
+
 # Es crea un trigger específic en Google Cloud Build per a que
-# s'executi en cada Pull Request a la que es detecti un commit nou
-resource "google_cloudbuild_trigger" "cd_devel_trigger" {
-  name        = "tfg-uoc-infraestructura-cd-devel"
-  description = "Trigger que s'executarà en cada Pull Request nova"
-  filename    = "gcp/ci/infraestructura/cloudbuild.yaml"
+# s'executi cada vegada que s'afegeixen canvis a la branca principal main.
+# Només s'aplicarà terraform quan els canvis afectin a l'entorn devel.
+resource "google_cloudbuild_trigger" "cd_trigger" {
+  name        = "tfg-uoc-cd-devel-infraestructura"
+  description = "Trigger que s'executarà cada nou commit a la branca main quan s'hagin modificat arxius del directori devel"
+  filename    = "gcp/cd/infraestructura/${local.environment}/cloudbuild.yaml"
+  included_files = ["gcp/${local.environment}/**"]
+
+  substitutions = {
+    _ENVIRONMENT = local.environment
+  }
 
   github {
     owner = "asaldana-uoc"
     name  = "tfg-uoc-infraestructura"
-    pull_request {
-      branch          = ".*"
-      comment_control = "COMMENTS_ENABLED_FOR_EXTERNAL_CONTRIBUTORS_ONLY"
+    push {
+      branch = "main"
     }
   }
 }
@@ -26,6 +35,6 @@ provider "google" {
 terraform {
   backend "gcs" {
     bucket = "tfg-uoc-tfstate-eu"
-    prefix = "common/ci/infraestructura"
+    prefix = "common/cd/infraestructura/devel"
   }
 }

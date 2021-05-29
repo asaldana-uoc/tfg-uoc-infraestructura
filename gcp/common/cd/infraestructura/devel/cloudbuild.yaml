@@ -5,21 +5,28 @@ steps:
     args:
       - '-c'
       - |
-        terraform fmt -check -diff -recursive || exit 1
+        current_path=`pwd`
+        for folder in `find ./gcp/${_ENVIRONMENT} -type d`
+        do
+          cd ${folder}
+          echo "[INFO] - Visualitzant els canvis d'infraestructura a aplicar en el directori ${folder}"
+          terraform init -backend=false || exit 1
+          terraform plan || exit 1
+          cd ${current_path}
+        done
     timeout: 60s
-  - id: 'terraform validate'
+  - id: 'terraform apply'
     name: 'hashicorp/terraform:0.15.3'
     entrypoint: 'sh'
     args:
       - '-c'
       - |
         current_path=`pwd`
-        for folder in `find ./gcp -type d`
+        for folder in `find ./gcp/${_ENVIRONMENT} -type d`
         do
           cd ${folder}
-          echo "[INFO] - Validating terraform files in path ${folder}"
-          terraform init -backend=false || exit 1
-          terraform validate || exit 1
+          echo "[INFO] - Visualitzant els canvis d'infraestructura a aplicar en el directori ${folder}"
+           terraform apply -auto-approve || exit 1
           cd ${current_path}
         done
     timeout: 60s

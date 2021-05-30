@@ -47,7 +47,7 @@ module "gke-private-cluster" {
       node_locations = join(",", local.zones)
       min_count      = 1
       max_count      = 2
-      disk_size_gb   = 100
+      disk_size_gb   = 80
       disk_type      = "pd-standard"
       image_type     = "cos_containerd"
       auto_repair    = true

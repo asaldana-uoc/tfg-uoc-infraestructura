@@ -16,7 +16,7 @@ module "gke-private-cluster" {
   version                    = "14.3.0"
   project_id                 = local.project_id
   name                       = format("%s-%s", local.prefix_name, "k8s-cp")
-  description                = "Clúster de Kubernetes per a la realització del TFG"
+  description                = "Clúster de Kubernetes per a la realització del TFG en la UOC"
   region                     = local.region
   regional                   = true
   zones                      = local.zones

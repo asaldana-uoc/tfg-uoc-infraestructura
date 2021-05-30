@@ -25,6 +25,7 @@ module "gke-private-cluster" {
   ip_range_pods              = "tfg-uoc-subnet-private-k8s-pods"
   ip_range_services          = "tfg-uoc-subnet-private-k8s-services"
   create_service_account     = true
+  grant_registry_access      = true
   remove_default_node_pool   = true
   http_load_balancing        = true
   default_max_pods_per_node  = 100

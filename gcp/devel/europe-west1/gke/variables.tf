@@ -2,5 +2,5 @@
 # podrà accedir al endpoint del control plane de GKE
 variable "allowed_ip_access_control_plane" {
   type    = string
-  default = "2.136.0.0/13"
+  default = "83.32.0.0/12"
 }

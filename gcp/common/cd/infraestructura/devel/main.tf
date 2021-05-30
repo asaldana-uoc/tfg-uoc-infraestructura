@@ -1,13 +1,15 @@
+# Definim una local per definir l'entorn. S'utilitzarà en la resta del codi per facilitar
+# la reutilització per la creació de nous entorns
 locals {
   environment = "devel"
 }
 
 # Es crea un trigger específic en Google Cloud Build per a que
-# s'executi cada vegada que s'afegeixen canvis a la branca principal main.
+# s'executi cada vegada que es detecti un canvi nou en la branca principal main.
 # Només s'aplicarà terraform quan els canvis afectin a l'entorn devel.
 resource "google_cloudbuild_trigger" "cd_trigger" {
-  name        = "tfg-uoc-cd-devel-infraestructura"
-  description = "Trigger que s'executarà cada nou commit a la branca main quan s'hagin modificat arxius del directori devel"
+  name        = "tfg-uoc-cd-${local.environment}-infraestructura"
+  description = "Trigger que s'executarà cada nou commit a la branca main quan s'hagin modificat arxius del directori ${local.environment}"
   filename    = "gcp/common/cd/infraestructura/${local.environment}/cloudbuild.yaml"
   included_files = ["gcp/${local.environment}/**"]
 

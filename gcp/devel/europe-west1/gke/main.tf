@@ -16,7 +16,7 @@ module "gke-private-cluster" {
   version                    = "14.3.0"
   project_id                 = local.project_id
   name                       = format("%s-%s", local.prefix_name, "k8s-cp")
-  description                = "Clúster de Kubernetes per a la realització del TFG"
+  description                = "Clúster de Kubernetes pel TFG de la UOC"
   region                     = local.region
   regional                   = true
   zones                      = local.zones
@@ -47,7 +47,7 @@ module "gke-private-cluster" {
       node_locations = join(",", local.zones)
       min_count      = 1
       max_count      = 2
-      disk_size_gb   = 80
+      disk_size_gb   = 75
       disk_type      = "pd-standard"
       image_type     = "cos_containerd"
       auto_repair    = true

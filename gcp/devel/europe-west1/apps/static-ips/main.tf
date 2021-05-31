@@ -23,7 +23,7 @@ output "tfg_uoc_app_prod_ip_address" {
 # Utilitzem el proveïdor google al haver de crear recursos a GCP
 provider "google" {
   project = "tfg-uoc-313418"
-  region  = "europe-west-1"
+  region  = "europe-west1"
 }
 
 # Aquesta secció es per definir la ubicació on s'emmagatzemarà l'estat de terraform.

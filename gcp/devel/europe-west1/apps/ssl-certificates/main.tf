@@ -8,8 +8,8 @@ resource "google_compute_managed_ssl_certificate" "tfg_uoc_app_devel_cert" {
 }
 
 # Creem una certificat SSL autogestionat per Google per la URL de l'aplicació de prod
-resource "google_compute_managed_ssl_certificate" "tfg_uoc_app_devel_cert" {
-  name = "tfg-uoc-app-devel-prod"
+resource "google_compute_managed_ssl_certificate" "tfg_uoc_app_prod_cert" {
+  name = "tfg-uoc-app-prod-cert"
 
   managed {
     domains = ["app-prod.asaldana.tech"]

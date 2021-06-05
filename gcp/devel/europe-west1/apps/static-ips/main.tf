@@ -1,12 +1,12 @@
 # Creem una reserva d'IP estàtica per l'entorn de desenvolupament
 resource "google_compute_global_address" "tfg_uoc_app_devel_ip_address" {
-  name        = "tfg-uoc-app-ip-devel"
+  name        = "tfg-uoc-app-devel-ip"
   description = "Adreça IP reservada pel balancejador de l'entorn devel"
 }
 
 # Creem una reserva d'IP estàtica per l'entorn de producció
 resource "google_compute_global_address" "tfg_uoc_app_prod_ip_address" {
-  name        = "tfg-uoc-app-ip-prod"
+  name        = "tfg-uoc-app-prod-ip"
   description = "Adreça IP reservada pel balancejador de l'entorn prod"
 }
 
